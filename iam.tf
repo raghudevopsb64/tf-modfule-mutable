@@ -57,6 +57,7 @@ resource "aws_iam_role" "ec2-role" {
 }
 
 resource "aws_iam_role_policy_attachment" "attach-policy" {
+  count      = var.IAM_POLICY_CREATE ? 1 : 0
   role       = aws_iam_role.ec2-role.*.name[0]
   policy_arn = aws_iam_policy.policy.*.arn[0]
 }
