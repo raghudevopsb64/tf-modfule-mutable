@@ -65,7 +65,7 @@ resource "aws_iam_role_policy_attachment" "attach-policy" {
 resource "aws_iam_instance_profile" "instance-profile" {
   count = var.IAM_POLICY_CREATE ? 1 : 0
   name  = "${var.COMPONENT}-${var.ENV}-ec2-role"
-  role  = aws_iam_role.ec2-role.name
+  role  = aws_iam_role.ec2-role.*.name[0]
 }
 
 
