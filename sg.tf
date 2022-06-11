@@ -32,3 +32,37 @@ resource "aws_security_group" "main" {
   }
 }
 
+
+resource "aws_security_group" "alb" {
+  name        = "allow_alb_${var.COMPONENT}_${var.ENV}"
+  description = "allow_alb_${var.COMPONENT}_${var.ENV}"
+  vpc_id      = var.VPC_ID
+
+  ingress {
+    description = "HTTP"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = var.VPC_ACCESS_TO_ALB
+  }
+
+  ingress {
+    description = "HTTPS"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = var.VPC_ACCESS_TO_ALB
+  }
+
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+  }
+
+  tags = {
+    Name = "allow_alb_${var.COMPONENT}_${var.ENV}"
+  }
+}

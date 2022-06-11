@@ -14,3 +14,9 @@ variable "PORT" {}
 variable "IAM_POLICY_CREATE" {
   default = false
 }
+
+variable "IS_ALB_INTERNAL" {
+  default = true
+}
+
+variable "VPC_ACCESS_TO_ALB" {}

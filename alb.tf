@@ -20,3 +20,16 @@ resource "aws_lb_target_group_attachment" "instances-to-tg" {
   target_id        = element(local.ALL_INSTANCE_IDS, count.index)
   port             = var.PORT
 }
+
+resource "aws_lb" "alb" {
+  name               = "${var.COMPONENT}-${var.ENV}-alb"
+  internal           = var.IS_ALB_INTERNAL
+  load_balancer_type = "application"
+  security_groups    = [aws_security_group.alb.id]
+  subnets            = var.SUBNET_IDS
+
+  tags = {
+    Name = "${var.COMPONENT}-${var.ENV}-alb"
+    ENV  = var.ENV
+  }
+}
