@@ -1,4 +1,7 @@
 resource "null_resource" "app-deploy" {
+  triggers {
+    ABC = timestamp()
+  }
   count = length(local.ALL_INSTANCE_IPS)
   provisioner "remote-exec" {
 
