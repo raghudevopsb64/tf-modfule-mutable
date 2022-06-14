@@ -1,5 +1,5 @@
 resource "null_resource" "app-deploy" {
-  triggers {
+  triggers = {
     ABC = timestamp()
   }
   count = length(local.ALL_INSTANCE_IPS)
