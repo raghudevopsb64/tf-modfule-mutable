@@ -20,13 +20,6 @@ variable "IS_ALB_INTERNAL" {
 }
 
 variable "VPC_ACCESS_TO_ALB" {}
-
 variable "DOCDB_ENDPOINT" {
-  default = "null"
-}
-variable "DOCDB_USERNAME" {
-  default = "null"
-}
-variable "DOCDB_PASSWORD" {
-  default = "null"
+  default = null
 }
