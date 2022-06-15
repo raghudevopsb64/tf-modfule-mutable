@@ -1,5 +1,5 @@
 resource "aws_route53_record" "alb" {
-  zone_id = "Z07578712H75FS9NNU2HC"
+  zone_id = var.PRIVATE_HOSTED_ZONE_ID
   name    = "${var.COMPONENT}-${var.ENV}.roboshop.internal"
   type    = "CNAME"
   ttl     = "300"
