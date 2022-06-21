@@ -19,6 +19,13 @@ resource "aws_ec2_tag" "name-tag" {
   value       = "${var.COMPONENT}-${var.ENV}"
 }
 
+resource "aws_ec2_tag" "monitor-tag" {
+  count       = var.SPOT_INSTANCE_COUNT
+  resource_id = element(aws_spot_instance_request.spot.*.spot_instance_id, count.index)
+  key         = "Monitor"
+  value       = "yes"
+}
+
 resource "aws_instance" "on-demand" {
   count                  = var.ONDEMAND_INSTANCE_COUNT
   ami                    = data.aws_ami.ami.id
@@ -28,6 +35,7 @@ resource "aws_instance" "on-demand" {
   iam_instance_profile   = var.IAM_POLICY_CREATE ? aws_iam_instance_profile.instance-profile.*.name[0] : null
 
   tags = {
-    Name = "${var.COMPONENT}-${var.ENV}"
+    Name    = "${var.COMPONENT}-${var.ENV}"
+    Monitor = "yes"
   }
 }
