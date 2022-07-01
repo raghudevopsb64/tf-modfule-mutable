@@ -27,3 +27,6 @@ variable "DOCDB_ENDPOINT" {
 
 variable "PRIVATE_HOSTED_ZONE_ID" {}
 
+variable "APP_VERSION" {
+  default = "1.0.0"
+}
